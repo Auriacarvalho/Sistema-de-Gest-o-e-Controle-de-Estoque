@@ -29,16 +29,18 @@
 
     .container {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100%;
+      gap: 20px;
     }
 
     .card {
       background-color: rgba(255, 255, 255, 0.95);
-      padding: 40px;
+      padding: 30px;
       border-radius: 10px;
-      width: 400px;
+      width: 700px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
       text-align: center;
     }
@@ -49,6 +51,23 @@
 
     .card p {
       margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
     }
 
     .action-buttons {
@@ -79,14 +98,53 @@
     <div class="card">
       <h3>Relatórios</h3>
       <p>Visualize os dados consolidados e gere relatórios para análise estratégica.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Período</th>
+            <th>Receitas (R$)</th>
+            <th>Despesas (R$)</th>
+            <th>Lucro (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-relatorios">
+          <!-- Dados inseridos via JavaScript -->
+        </tbody>
+      </table>
+
       <div class="action-buttons">
         <a href="index.html">Voltar</a>
         <a href="login.html">Sair</a>
       </div>
     </div>
   </div>
+
+  <script>
+    const relatorios = [
+      { periodo: "Agosto/2025", receitas: 1200, despesas: 450 },
+      { periodo: "Setembro/2025", receitas: 1500, despesas: 600 },
+      { periodo: "Outubro/2025", receitas: 1800, despesas: 700 }
+    ];
+
+    const tabela = document.getElementById("tabela-relatorios");
+
+    relatorios.forEach(r => {
+      const lucro = r.receitas - r.despesas;
+      const linha = document.createElement("tr");
+      linha.innerHTML = `
+        <td>${r.periodo}</td>
+        <td>R$ ${r.receitas.toFixed(2)}</td>
+        <td>R$ ${r.despesas.toFixed(2)}</td>
+        <td>R$ ${lucro.toFixed(2)}</td>
+      `;
+      tabela.appendChild(linha);
+    });
+  </script>
 </body>
 </html>
+
+
 
 
 

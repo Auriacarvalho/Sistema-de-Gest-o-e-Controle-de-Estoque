@@ -29,16 +29,18 @@
 
     .container {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100%;
+      gap: 20px;
     }
 
     .card {
       background-color: rgba(255, 255, 255, 0.95);
-      padding: 40px;
+      padding: 30px;
       border-radius: 10px;
-      width: 400px;
+      width: 700px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
       text-align: center;
     }
@@ -49,6 +51,29 @@
 
     .card p {
       margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .saldo {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
     }
 
     .action-buttons {
@@ -79,14 +104,60 @@
     <div class="card">
       <h3>Financeiro</h3>
       <p>Gerencie receitas, despesas e acompanhe o fluxo de caixa da sua operação.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Valor (R$)</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-financeiro">
+          <!-- Dados inseridos via JavaScript -->
+        </tbody>
+      </table>
+
+      <div class="saldo" id="saldo-total">Saldo Total: R$ 0,00</div>
+
       <div class="action-buttons">
         <a href="index.html">Voltar</a>
         <a href="login.html">Sair</a>
       </div>
     </div>
   </div>
+
+  <script>
+    const transacoes = [
+      { data: "01/09/2025", descricao: "Venda de salgados", tipo: "Receita", valor: 500 },
+      { data: "03/09/2025", descricao: "Compra de ingredientes", tipo: "Despesa", valor: 150 },
+      { data: "05/09/2025", descricao: "Pagamento de energia", tipo: "Despesa", valor: 80 },
+      { data: "10/09/2025", descricao: "Venda para evento", tipo: "Receita", valor: 300 }
+    ];
+
+    let saldo = 0;
+    const tabela = document.getElementById("tabela-financeiro");
+
+    transacoes.forEach(t => {
+      const linha = document.createElement("tr");
+      linha.innerHTML = `
+        <td>${t.data}</td>
+        <td>${t.descricao}</td>
+        <td>${t.tipo}</td>
+        <td>R$ ${t.valor.toFixed(2)}</td>
+      `;
+      tabela.appendChild(linha);
+
+      saldo += t.tipo === "Receita" ? t.valor : -t.valor;
+    });
+
+    document.getElementById("saldo-total").textContent = `Saldo Total: R$ ${saldo.toFixed(2)}`;
+  </script>
 </body>
 </html>
+
+>
 
 
 

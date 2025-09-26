@@ -23,7 +23,7 @@
       height: 100%;
       background: url('img/fotos_salgados.jpg') no-repeat center center fixed;
       background-size: cover;
-      opacity: 0.3; /* ajuste conforme desejar */
+      opacity: 0.3;
       z-index: -1;
     }
 
@@ -57,19 +57,36 @@
       font-size: 14px;
     }
 
-    .form-box button {
-      width: 100%;
+    .form-box .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .form-box .form-actions button {
+      flex: 1;
       padding: 12px;
-      background-color: #007bff;
-      color: white;
+      font-size: 16px;
       border: none;
       border-radius: 5px;
-      font-size: 16px;
+      color: white;
       cursor: pointer;
     }
 
-    .form-box button:hover {
+    .form-box .form-actions .save {
+      background-color: #007bff;
+    }
+
+    .form-box .form-actions .save:hover {
       background-color: #0056b3;
+    }
+
+    .form-box .form-actions .delete {
+      background-color: #dc3545;
+    }
+
+    .form-box .form-actions .delete:hover {
+      background-color: #c82333;
     }
 
     .form-box .actions {
@@ -105,7 +122,10 @@
         <input type="number" placeholder="Quantidade" required>
         <input type="number" step="0.01" placeholder="Valor (R$)" required>
         <textarea rows="4" placeholder="Descrição dos ingredientes" required></textarea>
-        <button type="submit">Salvar Produto</button>
+        <div class="form-actions">
+          <button type="submit" class="save">Salvar Produto</button>
+          <button type="reset" class="delete">Excluir Produto</button>
+        </div>
       </form>
       <div class="actions">
         <a href="index.html">Voltar</a>
@@ -115,3 +135,4 @@
   </div>
 </body>
 </html>
+

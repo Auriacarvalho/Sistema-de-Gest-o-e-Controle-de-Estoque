@@ -29,16 +29,18 @@
 
     .container {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100%;
+      gap: 20px;
     }
 
     .card {
       background-color: rgba(255, 255, 255, 0.95);
-      padding: 40px;
+      padding: 30px;
       border-radius: 10px;
-      width: 400px;
+      width: 700px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
       text-align: center;
     }
@@ -49,6 +51,23 @@
 
     .card p {
       margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
     }
 
     .action-buttons {
@@ -79,12 +98,63 @@
     <div class="card">
       <h3>Controle de Estoque</h3>
       <p>Acompanhe os produtos disponíveis e atualize as quantidades conforme necessário.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Entrada</th>
+            <th>Saída</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="estoque-tabela">
+          <!-- Dados serão inseridos aqui -->
+        </tbody>
+      </table>
+
       <div class="action-buttons">
         <a href="index.html">Voltar</a>
         <a href="login.html">Sair</a>
       </div>
     </div>
   </div>
+
+  <script>
+    const pedidos = [
+      { produto: "Coxinha", tipo: "entrada", quantidade: 100 },
+      { produto: "Coxinha", tipo: "saida", quantidade: 40 },
+      { produto: "Esfirra", tipo: "entrada", quantidade: 80 },
+      { produto: "Esfirra", tipo: "saida", quantidade: 20 },
+      { produto: "Kibe", tipo: "entrada", quantidade: 50 },
+      { produto: "Kibe", tipo: "saida", quantidade: 10 }
+    ];
+
+    const estoque = {};
+
+    pedidos.forEach(p => {
+      if (!estoque[p.produto]) {
+        estoque[p.produto] = { entrada: 0, saida: 0 };
+      }
+      estoque[p.produto][p.tipo] += p.quantidade;
+    });
+
+    const tabela = document.getElementById("estoque-tabela");
+    for (const produto in estoque) {
+      const entrada = estoque[produto].entrada;
+      const saida = estoque[produto].saida;
+      const total = entrada - saida;
+
+      const linha = document.createElement("tr");
+      linha.innerHTML = `
+        <td>${produto}</td>
+        <td>${entrada}</td>
+        <td>${saida}</td>
+        <td>${total}</td>
+      `;
+      tabela.appendChild(linha);
+    }
+  </script>
 </body>
 </html>
 

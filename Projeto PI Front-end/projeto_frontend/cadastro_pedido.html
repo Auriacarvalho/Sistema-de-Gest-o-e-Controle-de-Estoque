@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro de Pedido</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('img/fotos_salgados.jpg') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      gap: 20px;
+    }
+
+    .form-card {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .form-card h3 {
+      margin-bottom: 15px;
+    }
+
+    .form-card input, .form-card select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .form-actions button {
+      flex: 1;
+      padding: 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .form-actions .delete {
+      background-color: #dc3545;
+    }
+
+    .form-actions .submit {
+      background-color: #28a745;
+    }
+
+    .form-actions .delete:hover {
+      background-color: #c82333;
+    }
+
+    .form-actions .submit:hover {
+      background-color: #218838;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .nav-buttons a {
+      flex: 1;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-card">
+      <h3>Cadastro de Pedido</h3>
+      <form onsubmit="event.preventDefault(); alert('Pedido cadastrado com sucesso!');">
+        <input type="text" placeholder="Nome" required />
+        <input type="tel" placeholder="Telefone" required />
+        <input type="text" placeholder="Endereço" required />
+        <input type="number" placeholder="Quantidade de Pedido" required />
+        <input type="number" step="0.01" placeholder="Valor (R$)" required />
+        <select required>
+          <option value="">Forma de Pagamento</option>
+          <option value="pix">Pix</option>
+          <option value="dinheiro">Dinheiro</option>
+          <option value="cartao">Cartão</option>
+        </select>
+        <input type="date" required />
+        <div class="form-actions">
+          <button type="reset" class="delete">Excluir</button>
+          <button type="submit" class="submit">Cadastrar</button>
+        </div>
+      </form>
+      <div class="nav-buttons">
+        <a href="index.html">Voltar</a>
+        <a href="login.html">Sair</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
