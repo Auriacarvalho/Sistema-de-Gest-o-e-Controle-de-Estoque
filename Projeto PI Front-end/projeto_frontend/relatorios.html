@@ -1,148 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>Relatórios</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      position: relative;
-      overflow: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('img/fotos_salgados.jpg') no-repeat center center fixed;
-      background-size: cover;
-      opacity: 0.3;
-      z-index: -1;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      gap: 20px;
-    }
-
-    .card {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 10px;
-      width: 700px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
-
-    .card h3 {
-      margin-bottom: 15px;
-    }
-
-    .card p {
-      margin-bottom: 25px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-
-    th {
-      background-color: #007bff;
-      color: white;
-    }
-
-    .action-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .action-buttons a {
-      flex: 1;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-      text-align: center;
-    }
-
-    .action-buttons a:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  <style>/* mesmo estilo de fundo */</style>
 </head>
 <body>
   <div class="container">
-    <div class="card">
-      <h3>Relatórios</h3>
-      <p>Visualize os dados consolidados e gere relatórios para análise estratégica.</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Período</th>
-            <th>Receitas (R$)</th>
-            <th>Despesas (R$)</th>
-            <th>Lucro (R$)</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-relatorios">
-          <!-- Dados inseridos via JavaScript -->
-        </tbody>
-      </table>
-
-      <div class="action-buttons">
-        <a href="index.html">Voltar</a>
-        <a href="login.html">Sair</a>
-      </div>
-    </div>
+    <h1>Relatórios de Vendas</h1>
+    <ul id="relatorios"></ul>
   </div>
 
   <script>
-    const relatorios = [
-      { periodo: "Agosto/2025", receitas: 1200, despesas: 450 },
-      { periodo: "Setembro/2025", receitas: 1500, despesas: 600 },
-      { periodo: "Outubro/2025", receitas: 1800, despesas: 700 }
-    ];
-
-    const tabela = document.getElementById("tabela-relatorios");
-
-    relatorios.forEach(r => {
-      const lucro = r.receitas - r.despesas;
-      const linha = document.createElement("tr");
-      linha.innerHTML = `
-        <td>${r.periodo}</td>
-        <td>R$ ${r.receitas.toFixed(2)}</td>
-        <td>R$ ${r.despesas.toFixed(2)}</td>
-        <td>R$ ${lucro.toFixed(2)}</td>
-      `;
-      tabela.appendChild(linha);
-    });
+    async function carregarRelatorios() {
+      try {
+        const resposta = await fetch('http://localhost:3000/relatorios');
+        const relatorios = await resposta.json();
+        document.getElementById('relatorios').innerHTML =
+          relatorios.map(r => `<li>${r.mes}: R$ ${r.total_vendas}</li>`).join('');
+      } catch (erro) {
+        alert('Erro ao carregar relatórios.');
+      }
+    }
+    carregarRelatorios();
   </script>
 </body>
 </html>
+
+
+
+
 
 
 

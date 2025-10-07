@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>Financeiro</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+      margin: 0; padding: 0; height: 100%;
       font-family: Arial, sans-serif;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
 
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: url('img/fotos_salgados.jpg') no-repeat center center fixed;
       background-size: cover;
       opacity: 0.3;
@@ -28,136 +22,44 @@
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      gap: 20px;
-    }
-
-    .card {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
+      padding: 40px;
+      background-color: rgba(255,255,255,0.9);
+      margin: 50px auto;
+      width: 80%;
       border-radius: 10px;
-      width: 700px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
-
-    .card h3 {
-      margin-bottom: 15px;
-    }
-
-    .card p {
-      margin-bottom: 25px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-
-    th {
-      background-color: #007bff;
-      color: white;
-    }
-
-    .saldo {
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    .action-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .action-buttons a {
-      flex: 1;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-      text-align: center;
-    }
-
-    .action-buttons a:hover {
-      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="card">
-      <h3>Financeiro</h3>
-      <p>Gerencie receitas, despesas e acompanhe o fluxo de caixa da sua operação.</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Descrição</th>
-            <th>Tipo</th>
-            <th>Valor (R$)</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-financeiro">
-          <!-- Dados inseridos via JavaScript -->
-        </tbody>
-      </table>
-
-      <div class="saldo" id="saldo-total">Saldo Total: R$ 0,00</div>
-
-      <div class="action-buttons">
-        <a href="index.html">Voltar</a>
-        <a href="login.html">Sair</a>
-      </div>
-    </div>
+    <h1>Resumo Financeiro</h1>
+    <div id="resumo"></div>
   </div>
 
   <script>
-    const transacoes = [
-      { data: "01/09/2025", descricao: "Venda de salgados", tipo: "Receita", valor: 500 },
-      { data: "03/09/2025", descricao: "Compra de ingredientes", tipo: "Despesa", valor: 150 },
-      { data: "05/09/2025", descricao: "Pagamento de energia", tipo: "Despesa", valor: 80 },
-      { data: "10/09/2025", descricao: "Venda para evento", tipo: "Receita", valor: 300 }
-    ];
+    async function carregarFinanceiro() {
+      try {
+        const resposta = await fetch('http://localhost:3000/financeiro');
+        const dados = await resposta.json();
+        document.getElementById('resumo').innerHTML = `
+          <p>Receita: R$ ${dados.receita}</p>
+          <p>Despesas: R$ ${dados.despesas}</p>
+          <p>Lucro: R$ ${dados.lucro}</p>
+        `;
+      } catch (erro) {
+        alert('Erro ao carregar financeiro.');
+      }
+    }
 
-    let saldo = 0;
-    const tabela = document.getElementById("tabela-financeiro");
-
-    transacoes.forEach(t => {
-      const linha = document.createElement("tr");
-      linha.innerHTML = `
-        <td>${t.data}</td>
-        <td>${t.descricao}</td>
-        <td>${t.tipo}</td>
-        <td>R$ ${t.valor.toFixed(2)}</td>
-      `;
-      tabela.appendChild(linha);
-
-      saldo += t.tipo === "Receita" ? t.valor : -t.valor;
-    });
-
-    document.getElementById("saldo-total").textContent = `Saldo Total: R$ ${saldo.toFixed(2)}`;
+    carregarFinanceiro();
   </script>
 </body>
 </html>
 
->
+
+
+
+
 
 
 

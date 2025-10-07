@@ -1,43 +1,42 @@
-===========================================================
-Sim, auria! Você pode — e deve — colocar esse conteúdo no seu README.md. Ele está muito bem estruturado, claro e informativo. Aqui vai só uma pequena sugestão de formatação para deixar ainda mais bonito e compatível com o estilo Markdown do GitHub:
+Projeto PI Front-end — Gestão e Controle de Estoque
+Aplicação web desenvolvida em HTML, CSS e JavaScript puro, com integração a uma API backend para controle de produtos, pedidos, estoque, financeiro e relatórios.
 
-✅ Versão aprimorada para o README.md
-# ===========================================================
-# SISTEMA DE GESTÃO E CONTROLE DE ESTOQUE - README
-# ===========================================================
+🖼️ Visual
+Todas as páginas utilizam uma imagem de fundo transparente:
 
-📦 **SOBRE O SISTEMA**  
-Este sistema foi desenvolvido para facilitar o controle de estoque de produtos alimentícios, com funcionalidades como cadastro de produtos, visualização de pedidos, controle financeiro e geração de relatórios.
 
-🖥️ **INSTALAÇÃO LOCAL**  
-1. Baixe todos os arquivos do sistema (HTML, CSS, imagens e scripts).  
-2. Mantenha todos os arquivos na mesma pasta.  
-3. Abra o arquivo `login.html` em seu navegador para iniciar o sistema.
+🔐 Autenticação
+• 	Tela de login com verificação via 
+• 	Redirecionamento automático para  após login
+• 	Botão de logout disponível em todas as páginas principais
 
-🔐 **ACESSO AO SISTEMA**  
-- Usuário: `admin`  
-- Senha: `1234`  
+🔗 Integração com Backend
+O frontend foi atualizado para consumir dados reais via , substituindo os dados mockados.
 
-Após o login, você será redirecionado para a página principal (`index.html`), onde poderá navegar pelas seções:
 
-✅ **FUNCIONALIDADES**  
-- Cadastrar Produtos  
-- Visualizar Pedidos  
-- Gerenciar Estoque  
-- Controle Financeiro  
-- Relatórios
+🛠️ Como rodar no VS Code
+1. 	Clone o projeto
 
-🔄 **NAVEGAÇÃO**  
-- O botão **Voltar** leva à página principal (`index.html`).  
-- O botão **Sair** encerra a sessão e retorna à tela de login (`login.html`).
+2. 	Abra no VS Code
 
-📌 **OBSERVAÇÕES**  
-- Este sistema é estático e não possui integração com banco de dados.  
-- Para funcionalidades avançadas, recomenda-se implementar backend com PHP, Node.js ou outra linguagem de servidor.
+3. 	Instale e rode o backend
+Certifique-se de que o backend está rodando em .
+Exemplo com Node.js:
 
-📁 **ESTRUTURA DE PASTAS**  
-- `/img` → imagens utilizadas no fundo das páginas  
-- `/` → arquivos HTML da aplicação
+4. 	Abra o  com Live Server
+• 	Clique com o botão direito no 
+• 	Selecione "Open with Live Server"
+
+📁 Estrutura de Pastas
+
+
+📚 Tecnologias
+• 	HTML5
+• 	CSS3
+• 	JavaScript (ES6)
+• 	Fetch API
+• 	Backend REST (Node.js + Express)
+• 	Live Server (VS Code Extension)
 
 📞 **SUPORTE**  
-Para dúvidas ou melhorias, entre em contato com o desenvolvedor responsável.
+Para dúvidas ou melhorias, entre em contato com o desenvolvedores responsáveis.

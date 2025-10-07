@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>Pedidos</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+      margin: 0; padding: 0; height: 100%;
       font-family: Arial, sans-serif;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
 
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: url('img/fotos_salgados.jpg') no-repeat center center fixed;
       background-size: cover;
       opacity: 0.3;
@@ -28,68 +22,41 @@
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      gap: 20px;
-    }
-
-    .card {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
+      padding: 40px;
+      background-color: rgba(255,255,255,0.9);
+      margin: 50px auto;
+      width: 80%;
       border-radius: 10px;
-      width: 400px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
-
-    .card h3 {
-      margin-bottom: 15px;
-    }
-
-    .card p {
-      margin-bottom: 25px;
-    }
-
-    .action-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .action-buttons a {
-      flex: 1;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-      text-align: center;
-    }
-
-    .action-buttons a:hover {
-      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="card">
-      <h3>Lista de Pedidos</h3>
-      <p>Aqui você poderá visualizar e gerenciar os pedidos.</p>
-      <div class="action-buttons">
-        <a href="index.html">Voltar</a>
-        <a href="login.html">Sair</a>
-        <a href="cadastro_pedido.html">Cadastrar Pedido</a>
-      </div>
-    </div>
+    <h1>Pedidos Realizados</h1>
+    <ul id="lista-pedidos"></ul>
   </div>
+
+  <script>
+    async function carregarPedidos() {
+      try {
+        const resposta = await fetch('http://localhost:3000/pedidos');
+        const pedidos = await resposta.json();
+        document.getElementById('lista-pedidos').innerHTML =
+          pedidos.map(p => `<li>#${p.id} - ${p.cliente} - R$ ${p.total}</li>`).join('');
+      } catch (erro) {
+        alert('Erro ao carregar pedidos.');
+      }
+    }
+
+    carregarPedidos();
+  </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
